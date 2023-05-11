@@ -1,8 +1,8 @@
 // https://geekyfab.com/entry/2020/10/23/071000
 #include <Arduino.h>
+const int KEYIN[] = {28, 20, 16};
+const int KEYOUT[] = {3, 4, 2, 0};
 
-const int KEYIN[] = {16, 20, 28};
-const int KEYOUT[] = {0, 2, 3, 4};
 
 unsigned long previousMillis = 0;
 const long interval = 50;
@@ -37,12 +37,13 @@ void loop() {
   if(columnNum==3){
     for(int i=0; i<4; i++){
       for(int j=0; j<3; j++){
-        Serial.print(sw[i][j]);
+        if (sw[i][j]){
+          Serial.printf("push %d, %d\n", i, j);
+        }
       }
       Serial.println();
     }
-    Serial.println();
-    Serial.println();
-    delay(500);
+
+    delay(200);
   }
 }
